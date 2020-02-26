@@ -14,3 +14,5 @@ class LoginEvent extends UserLoginEvent {
 
   LoginEvent(this.email, this.password);
 }
+
+class SkipLoginEvent extends UserLoginEvent {}

@@ -25,9 +25,6 @@
  │   │   └── theme.dart
  │   └── widgets
  │       └── custom_snak_bar.dart
- ├── domain
- │   └── entities
- │       └── UserLogin.dart
  ├── injection_container.dart
  ├── main.dart
  └── screens

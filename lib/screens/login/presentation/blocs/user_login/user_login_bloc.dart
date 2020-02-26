@@ -42,6 +42,8 @@ class UserLoginBloc extends Bloc<UserLoginEvent, UserLoginState> {
       }, (success) async* {
         yield LoggedState(login: Login(token: success.token));
       });
+    } else if (event is SkipLoginEvent) {
+      yield LoggedState(login: Login(token: "111111111111111111111111"));
     }
   }
 }

@@ -52,9 +52,9 @@ class _LoginPageState extends State<LoginPage> {
       child: Scaffold(
         key: _scaffoldKey,
         body: AnnotatedRegion<SystemUiOverlayStyle>(
-            value: SystemUiOverlayStyle.dark.copyWith(
-              statusBarColor: CustomColor.statusBarColor,
-            ),
+          value: SystemUiOverlayStyle.dark.copyWith(
+            statusBarColor: CustomColor.statusBarColor,
+          ),
           child: _buildBody(context),
         ),
       ),
@@ -88,6 +88,14 @@ class _LoginPageState extends State<LoginPage> {
                 width: double.infinity,
                 height: 36,
                 child: _buildLoginButton(),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 14),
+              ),
+              Container(
+                width: double.infinity,
+                height: 36,
+                child: _buildSkipLoginButton(),
               ),
             ],
           ),
@@ -160,6 +168,50 @@ class _LoginPageState extends State<LoginPage> {
             },
             child: Text(
               "LOGIN",
+              style: CustomTheme.mainTheme.textTheme.button,
+            ),
+          );
+        } else if (state is LoadingState) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            _snackBar.hideAll();
+            _snackBar.showLoadingSnackBar();
+          });
+          return Container();
+        }
+        return Container();
+      },
+    );
+  }
+
+  BlocBuilder _buildSkipLoginButton() {
+    return BlocBuilder<UserLoginBloc, UserLoginState>(
+      condition: (prevState, currState) {
+        if (currState is LoggedState) {
+          _snackBar.hideAll();
+          Navigator.pushNamedAndRemoveUntil(context, HOME_ROUTE, (r) => false);
+        }
+        return !(currState is LoggedState);
+      },
+      builder: (context, state) {
+        if (state is NotLoggedState || state is ErrorState) {
+          if (state is ErrorState) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              _snackBar.hideAll();
+              _snackBar.showErrorSnackBar(state.message);
+            });
+          }
+          return RaisedButton(
+            shape: RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(4.0),
+            ),
+            color: CustomColor.logoBlue,
+            onPressed: () {
+              BlocProvider.of<UserLoginBloc>(context).add(
+                SkipLoginEvent(),
+              );
+            },
+            child: Text(
+              "SKIP LOGIN",
               style: CustomTheme.mainTheme.textTheme.button,
             ),
           );
