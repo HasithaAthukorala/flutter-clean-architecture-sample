@@ -1,0 +1,47 @@
+container:
+  image: cirrusci/flutter:v1.12.13-hotfix.6
+environment:
+  KEY_STORE: ENCRYPTED[b23f28befb3714c5d3f37e04f419f091e50a3bf12ae678f39f97677439fbc4f4fd70aa7d0beccbb3a701361c0d6c79bc]
+  GITHUB_TOKEN: ENCRYPTED[ef4f655063e815cc18aeab46a6a69e10dd68a3c2359b3291685679493895aadfc7e19b2385aac20925316aa4bf28942a]
+
+style_check_task:
+  only_if: $CIRRUS_BRANCH == "master" || $CIRRUS_PR != ""
+  pub_cache:
+    folder: ~/.pub-cache
+  int_script:
+    - flutter doctor
+    - flutter pub get
+    - dartanalyzer .
+
+debug_buid_task:
+  only_if: $CIRRUS_BRANCH == "master" || $CIRRUS_PR != ""
+  pub_cache:
+    folder: ~/.pub-cache
+  int_script:
+    - flutter doctor
+    - flutter pub get
+    - dartanalyzer .
+  build_dev_release_script:
+    - flutter build apk
+  always:
+    upload_artifacts:
+      path: "build/app/outputs/apk/release/*.apk"
+
+release_buid_task:
+  only_if: $CIRRUS_RELEASE != ""
+  pub_cache:
+    folder: ~/.pub-cache
+  int_script:
+    - flutter doctor
+    - flutter pub get
+    - dartanalyzer .
+  decrypt_dev_release_credentials_script:
+    - bash android/decrypt.sh
+  build_dev_release_script:
+    - flutter build apk --split-per-abi
+    - flutter build appbundle || true
+  always:
+    upload_artifacts:
+      path: "build/app/outputs/apk/release/*.apk"
+  upload_to_github_script:
+    - bash upload_artifacts.sh
