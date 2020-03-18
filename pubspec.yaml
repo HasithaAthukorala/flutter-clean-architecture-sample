@@ -54,6 +54,10 @@ dev_dependencies:
   json_serializable: ^3.2.5
   # API code generator
   chopper_generator: ^3.0.0
+  #Integration tests
+  flutter_driver:
+    sdk: flutter
+  test: any
 
 
 # For information on the generic Dart part of this file, see the

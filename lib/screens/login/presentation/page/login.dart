@@ -46,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    _snackBar = CustomSnackBar(scaffoldKey: _scaffoldKey);
+    _snackBar = CustomSnackBar(key: Key("snackbar"), scaffoldKey: _scaffoldKey);
     return GestureDetector(
       onTap: () => FocusScope.of(context).requestFocus(_viewNode),
       child: Scaffold(
@@ -154,6 +154,7 @@ class _LoginPageState extends State<LoginPage> {
             });
           }
           return RaisedButton(
+            key: Key("login"),
             shape: RoundedRectangleBorder(
               borderRadius: new BorderRadius.circular(4.0),
             ),
@@ -201,6 +202,7 @@ class _LoginPageState extends State<LoginPage> {
             });
           }
           return RaisedButton(
+            key: Key("skipLogin"),
             shape: RoundedRectangleBorder(
               borderRadius: new BorderRadius.circular(4.0),
             ),

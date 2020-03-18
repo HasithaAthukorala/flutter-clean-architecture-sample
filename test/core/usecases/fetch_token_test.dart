@@ -1,10 +1,9 @@
-import 'package:dartz/dartz.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:clean_architecture_with_bloc_app/core/error/failures.dart';
 import 'package:clean_architecture_with_bloc_app/core/usecases/fetch_token.dart';
 import 'package:clean_architecture_with_bloc_app/screens/login/domain/entities/login.dart';
 import 'package:clean_architecture_with_bloc_app/screens/login/domain/repositories/login_repository.dart';
-import 'package:clean_architecture_with_bloc_app/screens/login/domain/usecases/login_user.dart';
+import 'package:dartz/dartz.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
 class MockUserRepository extends Mock implements LoginRepository {}
