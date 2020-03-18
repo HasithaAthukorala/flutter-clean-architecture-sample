@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    _snackBar = CustomSnackBar(scaffoldKey: _scaffoldKey);
+    _snackBar = CustomSnackBar(key: Key("snackbar"), scaffoldKey: _scaffoldKey);
     return Scaffold(
       key: _scaffoldKey,
       body: AnnotatedRegion<SystemUiOverlayStyle>(
@@ -117,6 +117,7 @@ class _HomePageState extends State<HomePage> {
 
   RaisedButton _buildChangePasswordButton() {
     return RaisedButton(
+      key: Key("changePassword"),
       shape: RoundedRectangleBorder(
         borderRadius: new BorderRadius.circular(4.0),
       ),

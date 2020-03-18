@@ -52,7 +52,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
 
   @override
   Widget build(BuildContext context) {
-    _snackBar = CustomSnackBar(scaffoldKey: _scaffoldKey);
+    _snackBar = CustomSnackBar(key: Key("snackbar"),scaffoldKey: _scaffoldKey);
     return GestureDetector(
       onTap: () => FocusScope.of(context).requestFocus(_viewNode),
       child: Scaffold(
@@ -151,6 +151,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
       builder: (context, state) {
         if (state is InitialState) {
           return RaisedButton(
+            key: Key("changePassword"),
             shape: RoundedRectangleBorder(
               borderRadius: new BorderRadius.circular(4.0),
             ),

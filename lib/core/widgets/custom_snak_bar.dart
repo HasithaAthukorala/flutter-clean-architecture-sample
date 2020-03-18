@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class CustomSnackBar {
   final GlobalKey<ScaffoldState> scaffoldKey;
   final ScaffoldState scaffoldState;
+  final Key key;
 
-  CustomSnackBar({this.scaffoldKey, this.scaffoldState})
+  CustomSnackBar({this.key, this.scaffoldKey, this.scaffoldState})
       : assert(scaffoldState != null || scaffoldKey != null);
 
   void showErrorSnackBar(final msg) {
@@ -18,6 +19,7 @@ class CustomSnackBar {
   void showLoadingSnackBar() {
     hideAll();
     final snackBar = SnackBar(
+      key: key,
       content: Row(
         children: <Widget>[
           CircularProgressIndicator(),
@@ -39,6 +41,7 @@ class CustomSnackBar {
   }) {
     hideAll();
     final snackBar = SnackBar(
+      key: key,
       content: Text(
         text,
         maxLines: 2,
