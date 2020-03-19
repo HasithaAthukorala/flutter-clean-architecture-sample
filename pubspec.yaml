@@ -58,6 +58,8 @@ dev_dependencies:
   flutter_driver:
     sdk: flutter
   test: any
+  #bloc testing
+  bloc_test: ^4.0.0
 
 
 # For information on the generic Dart part of this file, see the

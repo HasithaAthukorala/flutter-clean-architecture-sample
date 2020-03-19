@@ -52,7 +52,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
 
   @override
   Widget build(BuildContext context) {
-    _snackBar = CustomSnackBar(key: Key("snackbar"),scaffoldKey: _scaffoldKey);
+    _snackBar = CustomSnackBar(key: Key("snackbar"), scaffoldKey: _scaffoldKey);
     return GestureDetector(
       onTap: () => FocusScope.of(context).requestFocus(_viewNode),
       child: Scaffold(
@@ -263,5 +263,6 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
 
 class BooleanPrimitiveWrapper {
   bool value;
+
   BooleanPrimitiveWrapper(this.value);
 }
